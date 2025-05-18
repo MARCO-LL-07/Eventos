@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Configurar precios - Página 1</title>
+</head>
+<body>
+  <h2>Configurar precios</h2>
+  <label>
+    Precio NORMAL: S/.
+    <input type="number" id="precioNormal" value="30" min="0" step="0.01" />
+  </label><br/>
+  <label>
+    Precio VIP: S/.
+    <input type="number" id="precioVip" value="50" min="0" step="0.01" />
+  </label><br/>
+  <label>
+    Precio PLATINUM: S/.
+    <input type="number" id="precioPlat" value="120" min="0" step="0.01" />
+  </label><br/><br/>
+  <button id="goPage2">Ir a página con precios</button>
+
+  <script>
+    document.getElementById('goPage2').addEventListener('click', () => {
+      const normal = parseFloat(document.getElementById('precioNormal').value) || 0;
+      const vip = parseFloat(document.getElementById('precioVip').value) || 0;
+      const plat = parseFloat(document.getElementById('precioPlat').value) || 0;
+
+      // Pasar precios a pagina2.html por query string
+      const url = `pagina2.html?normal=${normal}&vip=${vip}&plat=${plat}`;
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>

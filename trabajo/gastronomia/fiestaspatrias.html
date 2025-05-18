@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiestas Patrias - Detalle del Evento</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background-color: #0099ff;
+    }
+    .event-detail-section {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+    .event-banner img {
+      width: 100%;
+      height: auto;
+    }
+    .event-info {
+      padding: 15px;
+      background-color: #f9f9f9;
+    }
+    .info-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .info-header h2 {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    .add-favorite {
+      text-decoration: none;
+      color: #007bff;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+    }
+    .add-favorite svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+    }
+    .info-details p {
+      margin: 5px 0;
+      color: #333;
+      font-size: 0.95em;
+    }
+    .seats-section {
+      padding: 15px;
+      background-color: #eee;
+    }
+    .seats-header {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .seat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .seat-type {
+      color: #555;
+    }
+    .seat-price {
+      color: #777;
+    }
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+    }
+    .quantity-button {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 5px 8px;
+      background: none;
+      cursor: pointer;
+    }
+    .quantity-display {
+      margin: 0 5px;
+    }
+    .buy-button-container {
+      text-align: center;
+      padding: 15px;
+      background-color: #f9f9f9;
+    }
+    .buy-button {
+      background-color: #b1001d;
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .buy-button:hover {
+      background-color: #8c0017;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="event-detail-section">
+    <div class="event-banner">
+      <img src="../imagenes/Captura de pantalla 2025-05-12 155526.png" alt="Fiestas Patrias">
+    </div>
+    <div class="event-info">
+      <div class="info-header">
+        <h2>INFORMACIÓN</h2>
+        <a href="#" class="add-favorite">AÑADIR COMO FAVORITO
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.79 12 5.05C13.09 3.79 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.03L12 21.35Z"/>
+          </svg>
+        </a>
+      </div>
+      <div class="info-details">
+        <p><strong>Fecha:</strong> 28/07/2025</p>
+        <p><strong>Hora:</strong> 11:00 a.m.</p>
+        <p><strong>Lugar:</strong> Parque de la Exposición, Lima</p>
+        <p><strong>Descripción:</strong> Celebra las Fiestas Patrias con comida típica, música criolla, danzas folklóricas y mucho orgullo nacional. ¡Viva el Perú!</p>
+      </div>
+    </div>
+    <div class="seats-section">
+      <div class="seats-header">PLATOS</div>
+      <div class="seat-row">
+        <div class="seat-type">ANTICUCHOS</div>
+        <div class="seat-price">S/. 18.00</div>
+        <div class="quantity-selector">
+          <button class="quantity-button">-</button>
+          <span class="quantity-display">X1</span>
+          <button class="quantity-button">+</button>
+        </div>
+      </div>
+      <div class="seat-row">
+        <div class="seat-type">PACHAMANCA</div>
+        <div class="seat-price">S/. 32.00</div>
+        <div class="quantity-selector">
+          <button class="quantity-button">-</button>
+          <span class="quantity-display">X1</span>
+          <button class="quantity-button">+</button>
+        </div>
+      </div>
+      <div class="seat-row">
+        <div class="seat-type">CHICHA MORADA</div>
+        <div class="seat-price">S/. 8.00</div>
+        <div class="quantity-selector">
+          <button class="quantity-button">-</button>
+          <span class="quantity-display">X1</span>
+          <button class="quantity-button">+</button>
+        </div>
+      </div>
+    </div>
+   <!-- Enlace al pago de Fiestas Patrias -->
+<div class="buy-button-container">
+  <a href="fiestaspatrias-pago.html">
+    <button class="buy-button">¡Reserva y celebra!</button>
+  </a>
+</div>
+
+
+</body>
+</html>

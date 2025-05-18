@@ -1,0 +1,220 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(to right, #f2f5f8, #eaf0f6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    width: 360px;
+    transition: transform 0.3s ease;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 14px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.payment-methods,
+.tickets,
+.ticket-section,
+.terms-privacy,
+.total,
+.info-pago,
+.detalle-pago,
+.puedes-pagar,
+.pago-banca-movil,
+.qr-code,
+.info {
+    background-color: #f9fbfc;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid #dfe6ed;
+    transition: box-shadow 0.3s;
+}
+
+.payment-methods:hover,
+.tickets:hover,
+.ticket-section:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payment-methods h2,
+.tickets h2,
+.ticket-section h2 {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.credit-cards img,
+.deposit-banks img,
+.other-methods img {
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 0.95em;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 1em;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccd6e0;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: border 0.3s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.obligatorio, .opcional {
+    color: #888;
+    font-size: 0.75em;
+}
+
+.terms-privacy {
+    display: flex;
+    align-items: center;
+    font-size: 0.8em;
+    color: #555;
+}
+
+.terms-privacy input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button,
+.buy-button,
+.next-button,
+.back-button,
+.show-ticket-button,
+.download-button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+}
+
+button:hover,
+.buy-button:hover,
+.next-button:hover,
+.back-button:hover,
+.show-ticket-button:hover,
+.download-button:hover {
+    transform: scale(1.02);
+}
+
+.buy-button,
+.next-button {
+    background-color: #ff6f61;
+}
+
+.back-button {
+    background-color: #546e7a;
+}
+
+.show-ticket-button {
+    background-color: #42a5f5;
+}
+
+.download-button {
+    background-color: #66bb6a;
+}
+
+.qr-code img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
+.info {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.hidden {
+    display: none;
+}
+.mensaje {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 20px;
+      margin: 50px auto;
+      width: 80%;
+      max-width: 500px;
+      border: 2px solid #c3e6cb;
+      border-radius: 10px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 1.2em;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

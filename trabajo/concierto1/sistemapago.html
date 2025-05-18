@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proceso de Compra de Entradas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #f2f5f8, #eaf0f6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            width: 360px;
+            transition: transform 0.3s ease;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 14px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .payment-methods,
+        .tickets,
+        .ticket-section,
+        .terms-privacy,
+        .total,
+        .info-pago,
+        .detalle-pago,
+        .puedes-pagar,
+        .pago-banca-movil,
+        .qr-code,
+        .info {
+            background-color: #f9fbfc;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            padding: 18px;
+            border: 1px solid #dfe6ed;
+            transition: box-shadow 0.3s;
+        }
+
+        .payment-methods:hover,
+        .tickets:hover,
+        .ticket-section:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .payment-methods h2,
+        .tickets h2,
+        .ticket-section h2 {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .credit-cards img,
+        .deposit-banks img,
+        .other-methods img {
+            height: 30px;
+            margin-right: 10px;
+            vertical-align: middle;
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 0.95em;
+            align-items: center;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-button {
+            padding: 6px 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .quantity-button:hover {
+            background-color: #357ABD;
+        }
+
+        .quantity-display {
+            font-weight: bold;
+            font-size: 1.1em;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #ccc;
+            font-weight: bold;
+            font-size: 1em;
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccd6e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: border 0.3s;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="number"]:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .obligatorio, .opcional {
+            color: #888;
+            font-size: 0.75em;
+        }
+
+        .terms-privacy {
+            display: flex;
+            align-items: center;
+            font-size: 0.8em;
+            color: #555;
+        }
+
+        .terms-privacy input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button,
+        .buy-button,
+        .next-button,
+        .back-button,
+        .show-ticket-button,
+        .download-button {
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            color: white;
+        }
+
+        button:hover,
+        .buy-button:hover,
+        .next-button:hover,
+        .back-button:hover,
+        .show-ticket-button:hover,
+        .download-button:hover {
+            transform: scale(1.02);
+        }
+
+        .buy-button,
+        .next-button {
+            background-color: #ff6f61;
+        }
+
+        .back-button {
+            background-color: #546e7a;
+        }
+
+        .show-ticket-button {
+            background-color: #42a5f5;
+        }
+
+        .download-button {
+            background-color: #66bb6a;
+        }
+
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 6px;
+        }
+
+        .info {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .mensaje {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 500px;
+            border: 2px solid #c3e6cb;
+            border-radius: 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .ticket-section {
+            background-color: #f9fbfc;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            padding: 18px;
+            border: 1px solid #dfe6ed;
+            transition: box-shadow 0.3s;
+        }
+
+        .ticket-section:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- PAGE 1 -->
+    <div id="page1" class="page active">
+        <div class="tickets">
+            <h2>ENTRADAS</h2>
+            <div class="ticket-item">
+                <span>GENERAL</span>
+                <span id="precioEntrada">S/.0.00</span>
+                <div class="quantity-selector">
+                    <button class="quantity-button" onclick="adjustQuantity(-1)">-</button>
+                    <span id="cantidad" class="quantity-display">1</span>
+                    <button class="quantity-button" onclick="adjustQuantity(1)">+</button>
+                </div>
+            </div>
+            <div class="total">
+                <span>TOTAL:</span>
+                <span id="total">S/.0.00</span>
+            </div>
+        </div>
+        <button id="nextButton1" class="next-button" onclick="goToPage2()">SIGUIENTE</button>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div id="page2" class="page hidden">
+        <h2>Detalle de tu compra</h2>
+        <label><strong>Cantidad de entradas (GENERAL): </strong></label>
+        <div style="font-weight:bold; font-size:1.2em; margin-bottom:16px;" id="cantidad_normal_display">1</div>
+
+        <div id="formularios-container"></div>
+
+        <button id="buyButton" class="buy-button" onclick="goToPage3()">COMPRAR</button>
+        <button id="buyButton1" class="buy-button" onclick="goToPage3()">COMPRAR COMO REGALO</button>
+
+        <button id="backButton2" class="back-button" onclick="goToPage1()">REGRESAR</button>
+    </div>
+    <div id="page3" class="page hidden">
+            <div class="header">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/PagoEfectivo_logo.svg/1200px-PagoEfectivo_logo.svg.png" alt="PagoEfectivo" height="30">
+                <span>Información para tu pago</span>
+            </div>
+            <div class="info-pago">
+                <p>¡Estás a punto de finalizar tu compra en eDestinos!</p>
+                <p><strong>Empresa:</strong> PagoEfectivo</p>
+                <p><strong>Servicio:</strong> PagoEfectivo Dólares</p>
+            </div>
+            <div class="detalle-pago">
+                <div class="codigo-pago">
+                    <label for="cip">Código de pago (CIP)</label>
+                    <span>171189399</span>
+                </div>
+                <div class="monto-pago">
+                    <span>Monto a pagar</span>
+                    <strong>S/. 190.00</strong>
+                </div>
+                <p class="fecha-limite">Pagar antes del Viernes 21/07/2023 - 07:53 PM</p>
+            </div>
+            <div class="puedes-pagar">
+                <p>Puedes pagar en:</p>
+                <div class="bancos">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/BBVA_logo.svg/1200px-BBVA_logo.svg.png" alt="BBVA" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Logo_BCP.svg/1200px-Logo_BCP.svg.png" alt="BCP" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Interbank_logo.svg/1200px-Interbank_logo.svg.png" alt="Interbank" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Scotiabank_logo.svg/1200px-Scotiabank_logo.svg.png" alt="Scotiabank" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Caja_Arequipa_logo.svg/1200px-Caja_Arequipa_logo.svg.png" alt="Caja Arequipa" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Banco_de_la_Naci%C3%B3n_del_Per%C3%BA_logo.svg/1200px-Banco_de_la_Naci%C3%B3n_del_Per%C3%BA_logo.svg.png" alt="Banco de la Nación" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/BanBif_logo.svg/1200px-BanBif_logo.svg.png" alt="BanBif" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pichincha_logo.svg/1200px-Pichincha_logo.svg.png" alt="Banco Pichincha" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Fullcarga_logo.svg/1200px-Fullcarga_logo.svg.png" alt="Fullcarga" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Western_Union_logo.svg/1200px-Western_Union_logo.svg.png" alt="Western Union" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/MoneyGram_logo.svg/1200px-MoneyGram_logo.svg.png" alt="MoneyGram" height="25">
+                </div>
+            </div>
+            <div class="pago-banca-movil">
+                <h3>Pago vía Banca Móvil y por Internet.</h3>
+                <p><strong>BBVA, BCP, Interbank, Caja Arequipa, Scotiabank, BanBif y Banco Pichincha<sup>(*)</sup>.</strong></p>
+                <ul>
+                    <li>Selecciona la opción <strong>Pago de Servicios</strong>.</li>
+                    <li>Busca y selecciona la institución/empresa <strong>PAGOEFECTIVO</strong>.</li>
+                    <li>Selecciona <strong>PAGOEFECTIVO Soles</strong>.</li>
+                    <li>Ingresa tu <strong>código CIP: 171189399</strong> y sigue los pasos.</li>
+                </ul>
+                <p><sup>(*)</sup> Habilitado solo en banca móvil.</p>
+            </div>
+            <button id="backButton3" class="back-button">REGRESAR</button>
+            <button id="showTicketButton" class="show-ticket-button" onclick="goToPage5()">Ver entrada</button>
+        </div>
+        <!-- PAGE 4 - ENTRADA -->
+<div id="page4" class="page hidden">
+  <div class="header">NOTIFICACIONES</div>
+  <h2>ENTRADAS</h2>
+  <div class="qr-code">
+    <img id="pngwing.com.png" src="/pngwing.com.png" alt="Código QR">
+  </div>
+  <div class="info">
+    <p>Amazon Callao FC VS Colegio Nacional de Iquitos</p>
+    <p><strong>Lugar:</strong> Estadio Campolo Alcalde</p>
+    <p><strong>Fecha:</strong> 11 de mayo de 2025</p>
+    <p><strong>Hora:</strong> 11:00 AM</p>
+    <p><strong>Nombre del titular:</strong> <span id="nombreTitular"></span></p>
+    <p><strong>Número de entrada:</strong> A123456789</p>
+    <p><strong>Ubicación:</strong> Zona VIP - Fila B - Asiento 12</p>
+  </div>
+  <a href="#" class="download-button">DESCARGAR</a>
+  <button id="backButton4" class="back-button">REGRESAR</button>
+</div>
+
+<!-- PAGE 5 - REGALO -->
+<div id="page5" class="page hidden">
+  <div class="header">CONFIRMARMACION</div>
+  <div class="mensaje">TU ENTRADA HA SIDO ENVIADO CORRECTAMENTE AL CORREO ELECTRONICO</div>
+  <button id="showTicketButton1" class="show-ticket-button">Ver entrada</button>
+</div>
+</div>
+
+<script>
+  window.onload = function () {
+    function getQueryParam(nombre) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(nombre);
+    }
+
+    const precio = parseFloat(getQueryParam('precio')) || 0;
+    let cantidad = parseInt(getQueryParam('cantidad')) || 1;
+
+    const precioElem = document.getElementById('precioEntrada');
+    const cantidadElem = document.getElementById('cantidad');
+    const totalElem = document.getElementById('total');
+    const formulariosContainer = document.getElementById('formularios-container');
+    const cantidadDisplay = document.getElementById('cantidad_normal_display');
+
+    function updateTotal() {
+      totalElem.textContent = `S/. ${(cantidad * precio).toFixed(2)}`;
+    }
+
+    window.adjustQuantity = function (change) {
+      cantidad += change;
+      if (cantidad < 1) cantidad = 1;
+      if (cantidad > 10) cantidad = 10;
+      cantidadElem.textContent = cantidad;
+      updateTotal();
+    };
+
+    function generarFormularios() {
+      formulariosContainer.innerHTML = ''; // limpiar antes de generar
+      for (let i = 1; i <= cantidad; i++) {
+        const formularioHTML = `
+          <div class="ticket-section">
+            <div class="ticket-header">Entrada #${i}</div>
+            <div class="form-group">
+              <label for="nombre${i}">Nombre <span class="obligatorio">*</span></label>
+              <input type="text" id="nombre${i}" name="nombre${i}" required />
+            </div>
+            <div class="form-group">
+              <label for="dni${i}">DNI <span class="obligatorio">*</span></label>
+              <input type="text" id="dni${i}" name="dni${i}" maxlength="8" pattern="\\d{8}" title="Ingrese un DNI válido de 8 dígitos" required />
+            </div>
+            <div class="form-group">
+              <label for="correo${i}">Correo electrónico <span class="obligatorio">*</span></label>
+              <input type="email" id="correo${i}" name="correo${i}" placeholder="ejemplo@dominio.com" required />
+            </div>
+          </div>
+        `;
+        formulariosContainer.innerHTML += formularioHTML;
+      }
+    }
+
+    function mostrarPagina(idMostrar) {
+      // Oculta todas las páginas
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+        p.classList.add('hidden');
+      });
+      // Muestra la página solicitada
+      const page = document.getElementById(idMostrar);
+      page.classList.remove('hidden');
+      page.classList.add('active');
+    }
+
+    window.goToPage1 = function () {
+      mostrarPagina('page1');
+    };
+
+    window.goToPage2 = function () {
+      mostrarPagina('page2');
+      cantidadDisplay.textContent = cantidad;
+      generarFormularios();
+
+      // Habilitar botones de compra si hay al menos 1 entrada
+      document.getElementById("buyButton").disabled = !(cantidad > 0);
+      document.getElementById("buyButton1").disabled = !(cantidad > 0);
+    };
+
+    // Validación de formularios antes de avanzar
+    function validarFormularios() {
+      const inputsRequeridos = formulariosContainer.querySelectorAll('input[required]');
+      for (const input of inputsRequeridos) {
+        if (!input.value.trim()) {
+          alert('Por favor, complete todos los campos requeridos.');
+          input.focus();
+          return false;
+        }
+        if (input.id.startsWith('dni')) {
+          const dniVal = input.value.trim();
+          const dniRegex = /^\d{8}$/;
+          if (!dniRegex.test(dniVal)) {
+            alert('Por favor, ingrese un DNI válido de 8 dígitos.');
+            input.focus();
+            return false;
+          }
+        }
+        if (input.type === 'email') {
+          const emailVal = input.value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailVal)) {
+            alert('Por favor, ingrese un correo electrónico válido.');
+            input.focus();
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    window.goToPage3 = function () {
+      if (!validarFormularios()) {
+        return; // No avanzar si hay errores
+      }
+
+      mostrarPagina('page3');
+
+      // Actualizar monto total
+      const total = precio * cantidad;
+      document.querySelector("#page3 .monto-pago strong").textContent = `S/. ${total.toFixed(2)}`;
+
+      // Generar CIP aleatorio y actualizar
+      const cip = generarCIP();
+      document.querySelector("#page3 .codigo-pago span").textContent = cip;
+
+      // Actualizar CIP en instrucciones banca móvil
+      const cipInstruccion = document.querySelector("#page3 .pago-banca-movil ul li strong");
+      if (cipInstruccion) cipInstruccion.textContent = `código CIP: ${cip}`;
+    };
+
+    function generarCIP() {
+      return Math.floor(100000000 + Math.random() * 900000000);
+    }
+
+    window.goToPage4 = function () {
+      mostrarPagina('page4');
+
+      const nombre = document.getElementById('nombre1')?.value || 'No especificado';
+      document.getElementById('nombreTitular').textContent = nombre;
+    };
+
+    window.goToPage5 = function () {
+      mostrarPagina('page5');
+    };
+
+    // Botones regresar
+    document.getElementById("backButton2").onclick = goToPage1;
+    document.getElementById("backButton3").onclick = goToPage2;
+    document.getElementById("backButton4").onclick = goToPage3;
+
+    // Botón "Ver entrada" desde page5 → page4
+    document.getElementById("showTicketButton1").onclick = goToPage4;
+
+    
+    // Inicializar página 1
+    precioElem.textContent = `S/. ${precio.toFixed(2)}`;
+    cantidadElem.textContent = cantidad;
+    updateTotal();
+  };
+</script>
+
+
+
+</body>
+</html>

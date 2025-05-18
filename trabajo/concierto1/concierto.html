@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Conciertos</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #0099ff; /* Fondo azul */
+        }
+
+        .event-section {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-banner {
+            position: relative;
+        }
+
+        .event-banner img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .buy-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: #00ff00; /* Verde brillante */
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.9em;
+        }
+
+        .category-bar {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            background-color: #eee;
+            overflow-x: auto;
+            margin-bottom: 10px;
+        }
+
+        .category-button {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .category-button.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .search-bar {
+            padding: 10px;
+            background-color: #f8f8f8;
+            margin-bottom: 10px;
+        }
+
+        .search-bar input[type="text"] {
+            width: calc(100% - 30px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1em;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+        <input type="text" placeholder="Explorar eventos">
+        <button>🔍</button>
+    </div>
+
+    <!-- Barra de categorías -->
+    <div class="category-bar">
+        <button class="category-button" onclick="window.location.href='/gastronomia/gastronomia.html'">Gastronómica</button>
+        <button class="category-button active" onclick="window.location.href='/concierto1/concierto.html'">Conciertos</button>
+        <button class="category-button" onclick="window.location.href='/deporte1/deporte.html'">Deportes</button>
+        <button class="category-button" onclick="window.location.href='/teatro1/teatro.html'">Teatro</button>
+    </div>
+
+    <!-- Sección de eventos -->
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160124.png" alt="Biblio Fest II - Zombies en la Biblioteca">
+            <!-- Botón de compra redirige a biblio_fest.html -->
+            <button class="buy-button" onclick="window.location.href='biblio_fest.html'">Compra</button>
+        </div>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160152.png" alt="Victor Manuelle en Concierto">
+            <!-- Botón de compra redirige a victor_manuelle.html -->
+            <button class="buy-button" onclick="window.location.href='victor_manuelle.html'">Compra</button>
+        </div>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160220.png" alt="Selvámonos Oxapampa 2015 - Celso Piña">
+            <!-- Botón de compra redirige a selvamonos.html -->
+            <button class="buy-button" onclick="window.location.href='selvamonos.html'">Compra</button>
+        </div>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160240.png" alt="21 Festival Cultural Chepen Pone - Celebremos la Diversidad">
+            <!-- Botón de compra redirige a festival_chepen.html -->
+            <button class="buy-button" onclick="window.location.href='festival_chepen.html'">Compra</button>
+        </div>
+    </div>
+
+</body>
+</html>

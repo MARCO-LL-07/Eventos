@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Deportivos</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #0099ff; /* Un fondo gris claro */
+        }
+
+        .event-section {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-banner {
+            position: relative;
+        }
+
+        .event-banner img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .buy-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: #00ff00; /* Verde brillante */
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.9em;
+        }
+
+        /* Estilos para la barra de categorías (asumiendo que sigue presente) */
+        .category-bar {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            background-color: #eee;
+            overflow-x: auto;
+            margin-bottom: 10px;
+        }
+
+        .category-button {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .category-button.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        /* Estilos para la barra de búsqueda (asumiendo que sigue presente) */
+        .search-bar {
+            padding: 10px;
+            background-color: #f8f8f8;
+            margin-bottom: 10px;
+        }
+
+        .search-bar input[type="text"] {
+            width: calc(100% - 30px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1em;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar eventos">
+        <button>🔍</button>
+    </div>
+
+    <div class="category-bar">
+        <button class="category-button" onclick="window.location.href='/gastronomia/gastronomia.html'">Gastronómica</button>
+        <button class="category-button" onclick="window.location.href='/concierto1/concierto.html'">Conciertos</button>
+        <button class="category-button active" onclick="window.location.href='/deporte1/deporte.html'">Deportes</button>
+        <button class="category-button" onclick="window.location.href='/teatro1/teatro.html'">Teatro</button>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160754.png" alt="Copa Libertadores - Universitario vs Botafogo">
+            <!-- Redirige al HTML correspondiente al evento -->
+            <button class="buy-button" onclick="window.location.href='universitario_vs_botafogo.html'">Compra</button>
+        </div>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160807.png" alt="Copa Libertadores - La Gloria Eterna Final">
+            <!-- Redirige al HTML correspondiente al evento -->
+            <button class="buy-button" onclick="window.location.href='gloria_eterna_final.html'">Compra</button>
+        </div>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160821.png" alt="Liga 1 - Próximo Partido">
+            <!-- Redirige al HTML correspondiente al evento -->
+            <button class="buy-button" onclick="window.location.href='liga1_proximo_partido.html'">Compra</button>
+        </div>
+    </div>
+
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 160839.png" alt="Torneo Apertura - Universitario">
+            <!-- Redirige al HTML correspondiente al evento -->
+            <button class="buy-button" onclick="window.location.href='torneo_apertura_universitario.html'">Compra</button>
+        </div>
+    </div>
+
+</body>
+</html>

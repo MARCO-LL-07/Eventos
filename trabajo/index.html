@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Eventos</title>
+ <style>
+  body {
+   font-family: sans-serif;
+   margin: 0;
+   background-color: #f8f8f8;
+  }
+
+  .top-section {
+   background: linear-gradient(to bottom, #e040fb, #90caf9);
+   color: white;
+   padding: 20px;
+   border-radius: 0 0 20px 20px;
+   position: relative;
+   overflow: hidden;
+  }
+
+  .logo {
+   display: flex;
+   align-items: center;
+   margin-bottom: 15px;
+  }
+
+  .logo img {
+   width: 50px;
+   height: 50px;
+   margin-right: 2px;
+  }
+
+  .logo span {
+   font-size: 1.2em;
+   font-weight: bold;
+  }
+
+  .search-bar {
+   background-color: rgba(255, 255, 255, 0.2);
+   border-radius: 25px;
+   padding: 10px 15px;
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px;
+  }
+
+  .search-bar input[type="text"] {
+   flex-grow: 1;
+   border: none;
+   background: transparent;
+   color: white;
+   padding: 8px;
+   outline: none;
+  }
+
+  .search-bar input::placeholder {
+   color: rgba(255, 255, 255, 0.7);
+  }
+
+  .search-bar button {
+   background: none;
+   border: none;
+   color: white;
+   cursor: pointer;
+   padding: 5px;
+   outline: none;
+  }
+
+  .navigation {
+   display: flex;
+   justify-content: space-around;
+   margin-bottom: 20px;
+  }
+
+  .nav-link {
+   color: white;
+   text-decoration: none;
+   font-size: 0.9em;
+   padding: 8px 12px;
+   border-radius: 20px;
+  }
+
+  .nav-link:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .secondary-navigation {
+   display: flex;
+   justify-content: space-around;
+   font-size: 0.8em;
+  }
+
+  .secondary-nav-link {
+   color: white;
+   text-decoration: none;
+   padding: 5px 10px;
+  }
+
+  .secondary-nav-link:hover {
+   text-decoration: underline;
+  }
+
+  .top-section::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('ruta/a/tu/imagen_de_fondo.jpg');
+   background-size: cover;
+   background-position: center;
+   z-index: -1;
+  }
+
+  #resultado-busqueda {
+   text-align: center;
+   padding: 10px;
+   color: red;
+   font-weight: bold;
+  }
+ </style>
+</head>
+<body>
+
+ <div class="top-section">
+
+  <div class="logo">
+   <img src="logo-fotor-bg-remover-20250516142727.png" alt="Logo"> 
+   <span>EventBox</span>
+  </div>
+
+  <div class="search-bar">
+   <input type="text" id="buscador" placeholder="Buscar evento por nombre o tipo...">
+   <button onclick="buscarEnMenu()">🔍</button>
+  </div>
+
+  <nav class="navigation">
+   <a href="gastronomia/gastronomia.html" class="nav-link">Gastronomía</a>
+   <a href="concierto1/concierto.html" class="nav-link">Conciertos</a>
+   <a href="deporte1/deporte.html" class="nav-link">Deportes</a>
+   <a href="teatro1/teatro.html" class="nav-link">Teatro</a>
+  </nav>
+
+  <nav class="secondary-navigation">
+   <a href="#" class="secondary-nav-link">Explorar eventos</a>
+   <a href="#" class="secondary-nav-link">Categorías</a>
+   <a href="#" class="secondary-nav-link">Todos los eventos</a>
+   <a href="#" class="secondary-nav-link">Iniciar sesión o registrarse</a>
+  </nav>
+
+  <div id="resultado-busqueda"></div>
+ </div>
+
+ <script>
+  function buscarEnMenu() {
+   const texto = document.getElementById("buscador").value.toLowerCase().trim();
+   const resultado = document.getElementById("resultado-busqueda");
+
+   const rutas = {
+    "gastronomía": "gastronomia/gastronomia.html",
+    "gastronomia": "gastronomia/gastronomia.html",
+    "comida": "gastronomia/gastronomia.html",
+    "concierto": "concierto1/concierto.html",
+    "musica": "concierto1/concierto.html",
+    "música": "concierto1/concierto.html",
+    "deporte": "deporte1/deporte.html",
+    "futbol": "deporte1/deporte.html",
+    "fútbol": "deporte1/deporte.html",
+    "teatro": "teatro1/teatro.html",
+    "obra": "teatro1/teatro.html"
+   };
+
+   let encontrado = false;
+
+   for (let palabra in rutas) {
+    if (texto.includes(palabra)) {
+     window.location.href = rutas[palabra];
+     encontrado = true;
+     break;
+    }
+   }
+
+   if (!encontrado) {
+    resultado.innerHTML = "❌ No se encontró una categoría con ese nombre.";
+   }
+  }
+
+  document.getElementById("buscador").addEventListener("keydown", function(event) {
+   if (event.key === "Enter") {
+    buscarEnMenu();
+   }
+  });
+ </script>
+
+</body>
+</html>

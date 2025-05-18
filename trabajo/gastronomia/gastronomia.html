@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Gastronómicos</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #0099ff;
+        }
+
+        .event-section {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .event-banner {
+            position: relative;
+        }
+
+        .event-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .event-info {
+            padding: 15px;
+        }
+
+        .event-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .event-description {
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .buy-button {
+            background-color: #00cc66;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .buy-button:hover {
+            background-color: #00994d;
+        }
+
+        .category-bar {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            background-color: #eee;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .category-button {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .category-button.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .search-bar {
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+
+        .search-bar input[type="text"] {
+            width: calc(100% - 30px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1em;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Explorar eventos">
+        <button>🔍</button>
+    </div>
+
+    <div class="category-bar">
+        <button class="category-button active" onclick="window.location.href='/gastronomia/gastronomia.html'">Gastronómica</button>
+        <button class="category-button" onclick="window.location.href='/concierto1/concierto.html'">Conciertos</button>
+        <button class="category-button" onclick="window.location.href='/deporte1/deporte.html'">Deportes</button>
+        <button class="category-button" onclick="window.location.href='/teatro1/teatro.html'">Teatro</button>
+    </div>
+
+    <!-- Evento 1 -->
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 155417.png" alt="Mucho Gusto Tacna">
+        </div>
+        <div class="event-info">
+            <div class="event-title">Perú, Mucho Gusto – Tacna</div>
+            <div class="event-description">Deléitate con la mejor gastronomía del Perú en un evento lleno de sabor y tradición.</div>
+            <a href="muchogusto.html" class="buy-button">Compra</a>
+        </div>
+    </div>
+
+    <!-- Evento 2 -->
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 155449.png" alt="Día Nacional del Cebiche">
+        </div>
+        <div class="event-info">
+            <div class="event-title">Día Nacional del Cebiche</div>
+            <div class="event-description">Celebra el plato bandera del Perú con los mejores chefs y degustaciones.</div>
+            <a href="cebiche.html" class="buy-button">Compra</a>
+        </div>
+    </div>
+
+    <!-- Evento 3 -->
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 155507.png" alt="Mes de Arequipa">
+        </div>
+        <div class="event-info">
+            <div class="event-title">Mes de Arequipa – La Fiesta del Sabor</div>
+            <div class="event-description">Descubre los sabores tradicionales de Arequipa en su mes festivo.</div>
+            <a href="arequipa.html" class="buy-button">Compra</a>
+        </div>
+    </div>
+
+    <!-- Evento 4 -->
+    <div class="event-section">
+        <div class="event-banner">
+            <img src="../imagenes/Captura de pantalla 2025-05-12 155526.png" alt="Feria Fiestas Patrias">
+        </div>
+        <div class="event-info">
+            <div class="event-title">Feria Gastronómica – Fiestas Patrias</div>
+            <div class="event-description">Una feria especial para disfrutar los sabores patrios con toda la familia.</div>
+            <a href="fiestaspatrias.html" class="buy-button">Compra</a>
+        </div>
+    </div>
+    
+</body>
+</html>

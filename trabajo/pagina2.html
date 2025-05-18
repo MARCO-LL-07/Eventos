@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mostrar precios - Página 2</title>
+<style>
+  .tickets {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 300px;
+  }
+  .ticket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .total {
+    font-weight: bold;
+    border-top: 1px solid #ccc;
+    padding-top: 5px;
+  }
+</style>
+</head>
+<body>
+  <h2>Entradas y precios recibidos</h2>
+  <div class="tickets">
+    <div class="ticket-item">
+      <span>NORMAL</span>
+      <span id="precioNormal">S/. 0.00</span>
+      <span>X1</span>
+    </div>
+    <div class="ticket-item">
+      <span>VIP</span>
+      <span id="precioVip">S/. 0.00</span>
+      <span>X1</span>
+    </div>
+    <div class="ticket-item">
+      <span>PLATINUM</span>
+      <span id="precioPlat">S/. 0.00</span>
+      <span>X1</span>
+    </div>
+    <div class="total">
+      <span>TOTAL:</span>
+      <span id="total">S/. 0.00</span>
+    </div>
+  </div><br/>
+  <button id="backPage1">Volver a configurar precios</button>
+
+  <script>
+    // Leer parámetros URL
+    function getQueryParams() {
+      const params = {};
+      location.search.substr(1).split("&").forEach(pair => {
+        const [key, value] = pair.split("=");
+        if(key) params[key] = decodeURIComponent(value);
+      });
+      return params;
+    }
+
+    const params = getQueryParams();
+
+    // Mostrar precios en la página
+    const normal = parseFloat(params.normal) || 0;
+    const vip = parseFloat(params.vip) || 0;
+    const plat = parseFloat(params.plat) || 0;
+
+    document.getElementById('precioNormal').textContent = `S/. ${normal.toFixed(2)}`;
+    document.getElementById('precioVip').textContent = `S/. ${vip.toFixed(2)}`;
+    document.getElementById('precioPlat').textContent = `S/. ${plat.toFixed(2)}`;
+
+    const total = normal + vip + plat;
+    document.getElementById('total').textContent = `S/. ${total.toFixed(2)}`;
+
+    // Botón para volver a la página 1
+    document.getElementById('backPage1').addEventListener('click', () => {
+      window.location.href = 'pagina1.html';
+    });
+  </script>
+</body>
+</html>

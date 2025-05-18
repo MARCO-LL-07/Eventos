@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Compra de Entradas</title>
+    <style>
+        body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(to right, #f2f5f8, #eaf0f6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    width: 360px;
+    transition: transform 0.3s ease;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 14px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.payment-methods,
+.tickets,
+.ticket-section,
+.terms-privacy,
+.total,
+.info-pago,
+.detalle-pago,
+.puedes-pagar,
+.pago-banca-movil,
+.qr-code,
+.info {
+    background-color: #f9fbfc;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid #dfe6ed;
+    transition: box-shadow 0.3s;
+}
+
+.payment-methods:hover,
+.tickets:hover,
+.ticket-section:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payment-methods h2,
+.tickets h2,
+.ticket-section h2 {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.credit-cards img,
+.deposit-banks img,
+.other-methods img {
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 0.95em;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 1em;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccd6e0;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: border 0.3s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.obligatorio, .opcional {
+    color: #888;
+    font-size: 0.75em;
+}
+
+.terms-privacy {
+    display: flex;
+    align-items: center;
+    font-size: 0.8em;
+    color: #555;
+}
+
+.terms-privacy input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button,
+.buy-button,
+.next-button,
+.back-button,
+.show-ticket-button,
+.download-button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+}
+
+button:hover,
+.buy-button:hover,
+.next-button:hover,
+.back-button:hover,
+.show-ticket-button:hover,
+.download-button:hover {
+    transform: scale(1.02);
+}
+
+.buy-button,
+.next-button {
+    background-color: #ff6f61;
+}
+
+.back-button {
+    background-color: #546e7a;
+}
+
+.show-ticket-button {
+    background-color: #42a5f5;
+}
+
+.download-button {
+    background-color: #66bb6a;
+}
+
+.qr-code img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
+.info {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.hidden {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="page1" class="page active">
+            <div class="header">
+                MÉTODOS DE PAGO
+            </div>
+            <div class="payment-methods">
+                <h2>Tarjeta de crédito</h2>
+                <div class="credit-cards">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Visa_brand_logo.svg/1200px-Visa_brand_logo.svg.png" alt="Visa" width="50">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png" alt="Mastercard" width="50">
+                </div>
+                <h2>Depósito</h2>
+                <div class="deposit-banks">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Logo_BCP.svg/1200px-Logo_BCP.svg.png" alt="BCP" height="20">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/BBVA_logo.svg/1200px-BBVA_logo.svg.png" alt="BBVA" height="20">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Scotiabank_logo.svg/1200px-Scotiabank_logo.svg.png" alt="Scotiabank" height="20">
+                    <br>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Interbank_logo.svg/1200px-Interbank_logo.svg.png" alt="Interbank" height="20">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Banco_de_la_Naci%C3%B3n_del_Per%C3%BA_logo.svg/1200px-Banco_de_la_Naci%C3%B3n_del_Per%C3%BA_logo.svg.png" alt="Banco de la Nación" height="20">
+                </div>
+                <h2>Otro métodos</h2>
+                <div class="other-methods">
+                    <img src="https://yape.com.pe/static/media/yape_logo_morado.8330930b.svg" alt="Yape" height="30">
+                    <img src="https://www.plin.pe/static/media/plin-logo.6693c094.svg" alt="Plin" height="30">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/PagoEfectivo_logo.svg/1200px-PagoEfectivo_logo.svg.png" alt="PagoEfectivo" height="30">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Paypal_2014_logo.svg/1200px-Paypal_2014_logo.svg.png" alt="PayPal" height="30">
+                </div>
+            </div>
+            <div class="tickets">
+                <h2>ENTRADAS</h2>
+                <div class="ticket-item">
+                    <span>NORMAL</span>
+                    <span>S/. 20.00</span>
+                  <span>X1</span>
+                </div>
+                <div class="ticket-item">
+                    <span>VIP</span>
+                    <span>S/. 50.00</span>
+                    <span>X1</span>
+                </div>
+                <div class="ticket-item">
+                    <span>PLATINUM</span>
+                    <span>S/. 120.00</span>
+                    <span>X1</span>
+                </div>
+                <div class="total">
+                    <span>TOTAL:</span>
+                    <span>S/. 190.00</span>
+                </div>
+            </div>
+            <button id="nextButton1" class="next-button">SIGUIENTE</button>
+        </div>
+
+        <div id="page2" class="page hidden">
+            <h2>Detalle de tu compra</h2>
+            <div class="ticket-section">
+                <div class="ticket-header">
+                    <span>NORMAL</span>
+                    <span>S/. 20.00</span>
+                    <span>X1</span>
+                </div>
+                <div class="form-group">
+                    <label for="nombre_normal">NOMBRE Y APELLIDO <span class="obligatorio">OBLIGATORIO</span></label>
+                    <input type="text" id="nombre_normal" required>
+                </div>
+                <div class="form-group">
+                    <label for="dni_normal">DNI <span class="obligatorio">OBLIGATORIO</span></label>
+                    <input type="text" id="dni_normal" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo_normal">CORREO ELECTRONICO <span class="opcional">OPCIONAL</span></label>
+                    <input type="text" id="correo_normal">
+                </div>
+            </div>
+
+            <div class="ticket-section">
+                <div class="ticket-header">
+                    <span>VIP</span>
+                    <span>S/. 50.00</span>
+                    <span>X1</span>
+                </div>
+                <div class="form-group">
+                    <label for="nombre_vip">NOMBRE Y APELLIDO <span class="obligatorio">OBLIGATORIO</span></label>
+                    <input type="text" id="nombre_vip" required>
+                </div>
+                <div class="form-group">
+                    <label for="dni_vip">DNI <span class="obligatorio">OBLIGATORIO</span></label>
+                    <input type="text" id="dni_vip" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo_vip">CORREO ELECTRONICO <span class="opcional">OPCIONAL</span></label>
+                    <input type="text" id="correo_vip">
+                </div>
+            </div>
+
+            <div class="ticket-section">
+                <div class="ticket-header">
+                    <span>PLATINUM</span>
+                    <span>S/. 120.00</span>
+                    <span>X1</span>
+                </div>
+                <div class="form-group">
+                    <label for="nombre_platinum">NOMBRE Y APELLIDO <span class="obligatorio">OBLIGATORIO</span></label>
+                    <input type="text" id="nombre_platinum" required>
+                </div>
+                <div class="form-group">
+                    <label for="dni_platinum">DNI <span class="obligatorio">OBLIGATORIO</span></label>
+                    <input type="text" id="dni_platinum" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo_platinum">CORREO ELECTRONICO <span class="opcional">OPCIONAL</span></label>
+                    <input type="text" id="correo_platinum">
+                </div>
+            </div>
+
+            <div class="terms-privacy">
+                <input type="checkbox" id="terminos" required>
+                <label for="terminos">He leído y acepto los Términos y Condiciones y la Política de Privacidad.</label>
+            </div>
+
+            <div class="total">
+                <span>TOTAL:</span>
+                <span>S/. 190.00</span>
+            </div>
+
+            <button id="buyButton" class="buy-button" disabled>Comprar</button>
+            <button id="backButton2" class="back-button">REGRESAR</button>
+        </div>
+
+        <div id="page3" class="page hidden">
+            <div class="header">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/PagoEfectivo_logo.svg/1200px-PagoEfectivo_logo.svg.png" alt="PagoEfectivo" height="30">
+                <span>Información para tu pago</span>
+            </div>
+            <div class="info-pago">
+                <p>¡Estás a punto de finalizar tu compra en eDestinos!</p>
+                <p><strong>Empresa:</strong> PagoEfectivo</p>
+                <p><strong>Servicio:</strong> PagoEfectivo Dólares</p>
+            </div>
+            <div class="detalle-pago">
+                <div class="codigo-pago">
+                    <label for="cip">Código de pago (CIP)</label>
+                    <span>171189399</span>
+                </div>
+                <div class="monto-pago">
+                    <span>Monto a pagar</span>
+                    <strong>S/. 190.00</strong>
+                </div>
+                <p class="fecha-limite">Pagar antes del Viernes 21/07/2023 - 07:53 PM</p>
+            </div>
+            <div class="puedes-pagar">
+                <p>Puedes pagar en:</p>
+                <div class="bancos">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/BBVA_logo.svg/1200px-BBVA_logo.svg.png" alt="BBVA" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Logo_BCP.svg/1200px-Logo_BCP.svg.png" alt="BCP" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Interbank_logo.svg/1200px-Interbank_logo.svg.png" alt="Interbank" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Scotiabank_logo.svg/1200px-Scotiabank_logo.svg.png" alt="Scotiabank" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Caja_Arequipa_logo.svg/1200px-Caja_Arequipa_logo.svg.png" alt="Caja Arequipa" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Banco_de_la_Naci%C3%B3n_del_Per%C3%BA_logo.svg/1200px-Banco_de_la_Naci%C3%B3n_del_Per%C3%BA_logo.svg.png" alt="Banco de la Nación" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/BanBif_logo.svg/1200px-BanBif_logo.svg.png" alt="BanBif" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pichincha_logo.svg/1200px-Pichincha_logo.svg.png" alt="Banco Pichincha" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Fullcarga_logo.svg/1200px-Fullcarga_logo.svg.png" alt="Fullcarga" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Western_Union_logo.svg/1200px-Western_Union_logo.svg.png" alt="Western Union" height="25">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/MoneyGram_logo.svg/1200px-MoneyGram_logo.svg.png" alt="MoneyGram" height="25">
+                </div>
+            </div>
+            <div class="pago-banca-movil">
+                <h3>Pago vía Banca Móvil y por Internet.</h3>
+                <p><strong>BBVA, BCP, Interbank, Caja Arequipa, Scotiabank, BanBif y Banco Pichincha<sup>(*)</sup>.</strong></p>
+                <ul>
+                    <li>Selecciona la opción <strong>Pago de Servicios</strong>.</li>
+                    <li>Busca y selecciona la institución/empresa <strong>PAGOEFECTIVO</strong>.</li>
+                    <li>Selecciona <strong>PAGOEFECTIVO Soles</strong>.</li>
+                    <li>Ingresa tu <strong>código CIP: 171189399</strong> y sigue los pasos.</li>
+                </ul>
+                <p><sup>(*)</sup> Habilitado solo en banca móvil.</p>
+            </div>
+            <button id="backButton3" class="back-button">REGRESAR</button>
+            <button id="showTicketButton" class="show-ticket-button">Ver entrada</button>
+        </div>
+
+        <div id="page4" class="page hidden">
+            <div class="header">
+                NOTIFICACIONES
+            </div>
+            <h2>ENTRADAS</h2>
+            <div class="qr-code">
+                <img id="pngwing.com.png" src="pngwing.com.png" alt="Código QR">
+            </div>
+            <div class="info">
+                <p>Amazon Callao FC VS Colegio Nacional de Iquitos</p>
+                <p><strong>Lugar:</strong> Estadio Campolo Alcalde</p>
+                <p><strong>Fecha:</strong> 11 de mayo de 2025</p>
+                <p><strong>Hora:</strong> 11:00 AM</p>
+                <p><strong>Nombre del titular:</strong> <span id="nombreTitular"></span></p>
+                <p><strong>Número de entrada:</strong> A123456789</p>
+                <p><strong>Ubicación:</strong> Zona VIP - Fila B - Asiento 12</p>
+            </div>
+            <a href="#" class="download-button">DESCARGAR</a>
+            <button id="backButton4" class="back-button">REGRESAR</button>
+        </div>
+    </div>
+
+    <script>
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const page3 = document.getElementById('page3');
+        const page4 = document.getElementById('page4');
+
+        const nextButton1 = document.getElementById('nextButton1');
+        const buyButton = document.getElementById('buyButton');
+        const backButton2 = document.getElementById('backButton2');
+        const backButton3 = document.getElementById('backButton3');
+        const showTicketButton = document.getElementById('showTicketButton');
+        const backButton4 = document.getElementById('backButton4');
+
+        const nombreNormalInput = document.getElementById('nombre_normal');
+        const dniNormalInput = document.getElementById('dni_normal');
+        const nombreVipInput = document.getElementById('nombre_vip');
+        const dniVipInput = document.getElementById('dni_vip');
+        const nombrePlatinumInput = document.getElementById('nombre_platinum');
+        const dniPlatinumInput = document.getElementById('dni_platinum');
+        const terminosCheckbox = document.getElementById('terminos');
+
+        const nombreTitularSpan = document.getElementById('nombreTitular');
+        const qrCodeImage = document.getElementById('qrCodeImage');
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        nextButton1.addEventListener('click', () => {
+            showPage('page2');
+        });
+
+        backButton2.addEventListener('click', () => {
+            showPage('page1');
+        });
+
+        backButton3.addEventListener('click', () => {
+            showPage('page2');
+        });
+
+        backButton4.addEventListener('click', () => {
+            showPage('page3');
+        });
+
+        terminosCheckbox.addEventListener('change', () => {
+            buyButton.disabled = !terminosCheckbox.checked &&
+                nombreNormalInput.value && dniNormalInput.value &&
+                nombreVipInput.value && dniVipInput.value &&
+                nombrePlatinumInput.value && dniPlatinumInput.value;
+        });
+
+        nombreNormalInput.addEventListener('input', terminosCheckbox.dispatchEvent.bind(terminosCheckbox, new Event('change')));
+        dniNormalInput.addEventListener('input', terminosCheckbox.dispatchEvent.bind(terminosCheckbox, new Event('change')));
+        nombreVipInput.addEventListener('input', terminosCheckbox.dispatchEvent.bind(terminosCheckbox, new Event('change')));
+        dniVipInput.addEventListener('input', terminosCheckbox.dispatchEvent.bind(terminosCheckbox, new Event('change')));
+        nombrePlatinumInput.addEventListener('input', terminosCheckbox.dispatchEvent.bind(terminosCheckbox, new Event('change')));
+        dniPlatinumInput.addEventListener('input', terminosCheckbox.dispatchEvent.bind(terminosCheckbox, new Event('change')));
+
+        buyButton.addEventListener('click', () => {
+            const nombreCompleto = `${nombreNormalInput.value} ${dniNormalInput.value}, ${nombreVipInput.value} ${dniVipInput.value}, ${nombrePlatinumInput.value} ${dniPlatinumInput.value}`;
+             nombreTitularSpan.textContent = nombreCompleto;
+            // Aquí podrías generar un código QR único y actualizar la imagen
+            // qrCodeImage.src = generarQrCode(nombreCompleto); // Función ficticia
+            showPage('page3');
+        });
+
+        showTicketButton.addEventListener('click', () => {
+            showPage('page4');
+        });
+
+
+    </script>
+</body>
+</html>
